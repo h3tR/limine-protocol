@@ -99,7 +99,7 @@ pub struct MemoryMapRequest {
 }
 
 impl MemoryMapRequest {
-    const fn new(revision: u64) -> Self {
+    pub const fn new(revision: u64) -> Self {
         Self {
             id: LimineReqId::new([0x67cf3d9d378a806f, 0xe304acdfc50c3c62]),
             revision,
@@ -134,7 +134,7 @@ pub struct MemoryMapEntry {
 }
 
 impl MemoryMapEntry {
-    fn type_as_enum(&self) -> MemoryMapType {
+    pub fn type_as_enum(&self) -> MemoryMapType {
         match self.memmap_type {
             0 => MemoryMapType::Usable,
             1 => MemoryMapType::Reserved,
@@ -170,7 +170,7 @@ pub struct FramebufferRequest {
 }
 
 impl FramebufferRequest {
-    const fn new(revision: u64) -> Self {
+    pub const fn new(revision: u64) -> Self {
         Self {
             id: LimineReqId::new([0x9d5827dcd881dd75, 0xa3148604f6fab11b]),
             revision,
@@ -253,7 +253,7 @@ pub struct BootloaderInfoRequest{
 }
 
 impl BootloaderInfoRequest {
-    const fn new(revision: u64) -> Self {
+    pub const fn new(revision: u64) -> Self {
         Self {
             id: LimineReqId::new([0xf55038d8e2a1202f, 0x279426fcf5f59740]),
             revision,
