@@ -27,11 +27,11 @@ impl_liminine_req!(MemoryMapRequest, MemoryMapResponse);
 pub struct MemoryMapResponse {
     revision: u64,
     entry_count: u64,
-    entries: *const *const MemoryMapEntry
+    entries: *const *const MemoryRegionInfo
 }
 
 impl MemoryMapResponse {
-    pub fn get_entries(&self) -> PointerSlice<MemoryMapEntry> {
+    pub fn get_entries(&self) -> PointerSlice<MemoryRegionInfo> {
         PointerSlice::from(unsafe {
             from_raw_parts(self.entries, self.entry_count as usize)
         })
@@ -40,19 +40,20 @@ impl MemoryMapResponse {
 
 #[repr(C, align(8))]
 #[derive(Copy, Clone)]
-pub struct MemoryMapEntry {
+pub struct MemoryRegionInfo {
     pub base: u64,
     pub length: u64,
-    memmap_type: u64
+    region_type: u64
 }
 
-impl MemoryMapEntry {
-    pub fn get_type(&self) -> MemoryMapType {
-        MemoryMapType::from(self.memmap_type)
+impl MemoryRegionInfo {
+    pub fn get_type(&self) -> MemoryRegionType {
+        MemoryRegionType::from(self.region_type)
     }
 }
 
-pub enum MemoryMapType {
+#[derive(PartialEq)]
+pub enum MemoryRegionType {
     Usable,
     Reserved,
     AcpiReclaimable,
@@ -64,18 +65,18 @@ pub enum MemoryMapType {
     AcpiTables
 }
 
-impl From<u64> for MemoryMapType {
+impl From<u64> for MemoryRegionType {
     fn from(value: u64) -> Self {
         match value {
-            0 => MemoryMapType::Usable,
-            1 => MemoryMapType::Reserved,
-            2 => MemoryMapType::AcpiReclaimable,
-            3 => MemoryMapType::AcpiNvs,
-            4 => MemoryMapType::BadMemory,
-            5 => MemoryMapType::BootloaderReclaimable,
-            6 => MemoryMapType::ExecutableAndModules,
-            7 => MemoryMapType::Framebuffer,
-            8 => MemoryMapType::AcpiTables,
+            0 => MemoryRegionType::Usable,
+            1 => MemoryRegionType::Reserved,
+            2 => MemoryRegionType::AcpiReclaimable,
+            3 => MemoryRegionType::AcpiNvs,
+            4 => MemoryRegionType::BadMemory,
+            5 => MemoryRegionType::BootloaderReclaimable,
+            6 => MemoryRegionType::ExecutableAndModules,
+            7 => MemoryRegionType::Framebuffer,
+            8 => MemoryRegionType::AcpiTables,
             _ => panic!("Obtained invalid MemoryMap Type")
         }
     }
