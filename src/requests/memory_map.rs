@@ -41,8 +41,8 @@ impl MemoryMapResponse {
 #[repr(C, align(8))]
 #[derive(Copy, Clone)]
 pub struct MemoryMapEntry {
-    base: u64,
-    length: u64,
+    pub base: u64,
+    pub length: u64,
     memmap_type: u64
 }
 
