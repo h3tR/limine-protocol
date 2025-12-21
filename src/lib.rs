@@ -6,40 +6,40 @@ For more information read [The Limine Boot Protocol](https://codeberg.org/Limine
 
 Example Usage:
 ```
-const REVISION: u64 = 4;
-
-#[used]
-#[unsafe(link_section = ".limine_reqs")]
-static LIMINE_BASE_REVISION: [u64; 4] = use_base_revision(4);
-
-#[used]
-#[unsafe(link_section = ".limine_req_start")]
-static LIMINE_REQUEST_START_MARKER: [u64; 4] = REQUEST_START_MARKER;
-
-#[used]
-#[unsafe(link_section = ".limine_reqs")]
-pub static MEMORY_MAP_REQUEST: MemoryMapRequest = MemoryMapRequest::new(REVISION);
-
-#[used]
-#[unsafe(link_section = ".limine_reqs")]
-pub static FRAMEBUFFER_REQUEST: FramebufferRequest = FramebufferRequest::new(REVISION);
-
-#[used]
-#[unsafe(link_section = ".limine_reqs")]
-pub static BOOTLOADER_INFO_REQUEST: BootloaderInfoRequest = BootloaderInfoRequest::new(REVISION);
-
-#[used]
-#[unsafe(link_section = ".limine_req_end")]
-static LIMINE_REQUEST_END_MARKER: [u64; 2] = REQUEST_END_MARKER;
-
-pub fn kernel_main() -> ! {
-    let bootloader_info_resp = BOOTLOADER_INFO_REQUEST.get_response().expect("BootloaderInfo request had no response");
-    kprint!("Bootloader: {} {}",bootloader_info_resp.get_name(), bootloader_info_resp.get_version())
-
-    let memory_map_resp = MEMORY_MAP_REQUEST.get_response().expect("Memory map request had no response");
-    let memory_map = memory_map_resp.get_entries();
-}
-```
+* use limine_protocol_for_rust::requests::hhdm::HigherHalfDirectMapRequest;const REVISION: u64 = 4;
+* 
+* #[used]
+* #[unsafe(link_section = ".limine_reqs")]
+* static LIMINE_BASE_REVISION: [u64; 4] = use_base_revision(4);
+* 
+* #[used]
+* #[unsafe(link_section = ".limine_req_start")]
+* static LIMINE_REQUEST_START_MARKER: [u64; 4] = REQUEST_START_MARKER;
+* 
+* #[used]
+* #[unsafe(link_section = ".limine_reqs")]
+* pub static MEMORY_MAP_REQUEST: MemoryMapRequest = MemoryMapRequest::new(REVISION);
+* 
+* #[used]
+* #[unsafe(link_section = ".limine_reqs")]
+* pub static HHDM_REQUEST: HigherHalfDirectMapRequest = HigherHalfDirectMapRequest::new(REVISION);
+* 
+* #[used]
+* #[unsafe(link_section = ".limine_reqs")]
+* pub static FRAMEBUFFER_REQUEST: FramebufferRequest = FramebufferRequest::new(REVISION);
+* 
+* #[used]
+* #[unsafe(link_section = ".limine_req_end")]
+* static LIMINE_REQUEST_END_MARKER: [u64; 2] = REQUEST_END_MARKER;
+* 
+* pub fn kernel_main() -> ! {
+*     let bootloader_info_resp = BOOTLOADER_INFO_REQUEST.get_response().expect("BootloaderInfo request had no response");
+*     kprint!("Bootloader: {} {}",bootloader_info_resp.get_name(), bootloader_info_resp.get_version());
+* 
+*     let memory_map_resp = MEMORY_MAP_REQUEST.get_response().expect("Memory map request had no response");
+*     let memory_map = memory_map_resp.get_entries();
+* }
+* ```
 
 */
 

@@ -1,3 +1,6 @@
+# Limine Protocol for Rust
+[![Crates.io](https://img.shields.io/crates/v/limine-protocol-for-rust)](https://crates.io/crates/limine-protocol-for-rust)
+[![docs.rs](https://img.shields.io/badge/docs.rs-documentation-green.svg)](https://docs.rs/limine-protocol-for-rust)
 This crate implements a couple of utilities for making something compatible with the Limine Boot Protocol.
 It serves as an equivalent to the *'limine.h'* file, along with some extra utilities for making response retrieval and reading provided data easier.
 
@@ -33,7 +36,7 @@ static LIMINE_REQUEST_END_MARKER: [u64; 2] = REQUEST_END_MARKER;
 
 pub fn kernel_main() -> ! {
     let bootloader_info_resp = BOOTLOADER_INFO_REQUEST.get_response().expect("BootloaderInfo request had no response");
-    kprint!("Bootloader: {} {}",bootloader_info_resp.get_name(), bootloader_info_resp.get_version())
+    kprint!("Bootloader: {} {}",bootloader_info_resp.get_name(), bootloader_info_resp.get_version());
 
     let memory_map_resp = MEMORY_MAP_REQUEST.get_response().expect("Memory map request had no response");
     let memory_map = memory_map_resp.get_entries();
