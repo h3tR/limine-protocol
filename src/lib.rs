@@ -47,8 +47,8 @@ pub fn kernel_main() -> ! {
 
 #![no_std]
 
-mod util;
-mod requests;
+pub mod util;
+pub mod requests;
 
 pub const REQUEST_START_MARKER: [u64; 4] = [ 0xf6b8f4b39de7d1ae, 0xfab91a6940fcb9cf, 0x785c6ed015d3e316, 0x181e920a7852b9d9 ];
 pub const REQUEST_END_MARKER: [u64; 2] = [ 0xadc0e0531bb10d03, 0x9572709f31764c62 ];
