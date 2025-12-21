@@ -25,6 +25,7 @@ impl_liminine_req!(FramebufferRequest, FramebufferResponse);
 
 
 #[repr(C, align(8))]
+#[derive(Copy, Clone)]
 pub struct FramebufferResponse {
     revision: u64,
     framebuffer_count: u64,

@@ -23,6 +23,7 @@ impl BootloaderInfoRequest {
 impl_liminine_req!(BootloaderInfoRequest, BootloaderInfoResponse);
 
 #[repr(C, align(8))]
+#[derive(Copy, Clone)]
 pub struct BootloaderInfoResponse {
     revision: u64,
     name: *const u8,

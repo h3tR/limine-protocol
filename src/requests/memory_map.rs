@@ -24,6 +24,7 @@ impl MemoryMapRequest {
 impl_liminine_req!(MemoryMapRequest, MemoryMapResponse);
 
 #[repr(C, align(8))]
+#[derive(Copy, Clone)]
 pub struct MemoryMapResponse {
     revision: u64,
     entry_count: u64,
