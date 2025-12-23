@@ -7,6 +7,8 @@ pub mod executable_cmdline;
 pub mod firmware_type;
 pub mod stack_size;
 pub mod paging_mode;
+#[cfg(not(target_arch = "loongarch64"))]
+pub mod multiprocessor;
 #[cfg(target_arch = "riscv64")]
 pub mod bsp_hart_id;
 pub mod executable_file;
