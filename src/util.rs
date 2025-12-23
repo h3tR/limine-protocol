@@ -17,3 +17,10 @@ impl<T: 'static> PointerSlice<T> {
         self.inner.get(index).map(|&ptr| unsafe { &*ptr })
     }
 }
+
+
+///macro for applying attributes to a group of consts. Stolen from (https://users.rust-lang.org/t/is-it-possible-for-rust-adding-a-precompiler/122746/7)
+#[macro_export]
+macro_rules! group {
+    ($($tt:tt)*) => { $($tt)* }
+}

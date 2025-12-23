@@ -3,7 +3,7 @@
 use crate::requests::LimineRequest;
 use core::mem::MaybeUninit;
 use core::slice::{from_raw_parts};
-use crate::{impl_liminine_req, LimineReqId};
+use crate::{impl_limine_req, LimineReqId};
 use crate::util::PointerSlice;
 
 #[repr(C, align(8))]
@@ -23,7 +23,7 @@ impl FramebufferRequest {
     }
 }
 
-impl_liminine_req!(FramebufferRequest, FramebufferResponse);
+impl_limine_req!(FramebufferRequest, FramebufferResponse);
 
 
 #[repr(C, align(8))]

@@ -2,7 +2,7 @@
 
 use crate::requests::LimineRequest;
 use core::mem::MaybeUninit;
-use crate::{impl_liminine_req, LimineReqId};
+use crate::{impl_limine_req, LimineReqId};
 
 #[repr(C, align(8))]
 pub struct HigherHalfDirectMapRequest{
@@ -21,7 +21,7 @@ impl HigherHalfDirectMapRequest {
     }
 }
 
-impl_liminine_req!(HigherHalfDirectMapRequest, HigherHalfDirectMapResponse);
+impl_limine_req!(HigherHalfDirectMapRequest, HigherHalfDirectMapResponse);
 
 #[repr(C, align(8))]
 #[derive(Copy, Clone)]

@@ -3,7 +3,7 @@
 use crate::requests::LimineRequest;
 use core::mem::MaybeUninit;
 use core::slice::from_raw_parts;
-use crate::{impl_liminine_req, LimineReqId};
+use crate::{impl_limine_req, LimineReqId};
 use crate::util::PointerSlice;
 
 #[repr(C, align(8))]
@@ -23,7 +23,7 @@ impl MemoryMapRequest {
     }
 }
 
-impl_liminine_req!(MemoryMapRequest, MemoryMapResponse);
+impl_limine_req!(MemoryMapRequest, MemoryMapResponse);
 
 #[repr(C, align(8))]
 #[derive(Copy, Clone)]
@@ -80,7 +80,7 @@ impl From<u64> for MemoryRegionType {
             6 => MemoryRegionType::ExecutableAndModules,
             7 => MemoryRegionType::Framebuffer,
             8 => MemoryRegionType::AcpiTables,
-            _ => panic!("Obtained invalid MemoryMap Type")
+            _ => panic!("Invalid MemoryMap Type")
         }
     }
 }

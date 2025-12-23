@@ -2,7 +2,7 @@
 //! [Bootloader Info Feature](https://codeberg.org/Limine/limine-protocol/src/branch/trunk/PROTOCOL.md#bootloader-info-feature)
 use crate::requests::LimineRequest;
 use core::mem::MaybeUninit;
-use crate::{impl_liminine_req, LimineReqId};
+use crate::{impl_limine_req, LimineReqId};
 use core::ffi::{c_char, CStr};
 
 #[repr(C, align(8))]
@@ -22,25 +22,25 @@ impl BootloaderInfoRequest {
     }
 }
 
-impl_liminine_req!(BootloaderInfoRequest, BootloaderInfoResponse);
+impl_limine_req!(BootloaderInfoRequest, BootloaderInfoResponse);
 
 #[repr(C, align(8))]
 #[derive(Copy, Clone)]
 pub struct BootloaderInfoResponse {
     revision: u64,
-    name: *const u8,
-    version: *const u8
+    name: *const c_char,
+    version: *const c_char
 }
 impl BootloaderInfoResponse {
     pub fn get_name(&self) -> &str {
         unsafe {
-            CStr::from_ptr(self.name as *const c_char).to_str().unwrap()
+            CStr::from_ptr(self.name).to_str().unwrap()
         }
     }
 
     pub fn get_version(&self) -> &str {
         unsafe {
-            CStr::from_ptr(self.version as *const c_char).to_str().unwrap()
+            CStr::from_ptr(self.version).to_str().unwrap()
         }
     }
 }
