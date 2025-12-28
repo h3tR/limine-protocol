@@ -9,7 +9,8 @@ pub struct StackSizeRequest{
     id: LimineReqId,
     revision: u64,
     resp: MaybeUninit<usize>,
-    stack_size: u64
+    ///Stack size in bytes
+    pub stack_size: u64
 }
 
 impl StackSizeRequest {
